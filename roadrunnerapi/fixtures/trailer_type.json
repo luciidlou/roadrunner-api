@@ -1,0 +1,58 @@
+[
+    {
+        "model": "roadrunnerapi.trailertype",
+        "pk": 1,
+        "fields": {
+            "label": "53' Dry Van"
+        }
+    },
+    {
+        "model": "roadrunnerapi.trailertype",
+        "pk": 2,
+        "fields": {
+            "label": "53' Reefer"
+        }
+    },
+    {
+        "model": "roadrunnerapi.trailertype",
+        "pk": 3,
+        "fields": {
+            "label": "53' Drop-Deck"
+        }
+    },
+    {
+        "model": "roadrunnerapi.trailertype",
+        "pk": 4,
+        "fields": {
+            "label": "Hot Shot"
+        }
+    },
+    {
+        "model": "roadrunnerapi.trailertype",
+        "pk": 5,
+        "fields": {
+            "label": "Conestoga"
+        }
+    },
+    {
+        "model": "roadrunnerapi.trailertype",
+        "pk": 6,
+        "fields": {
+            "label": "Removable Gooseneck"
+        }
+    },
+    {
+        "model": "roadrunnerapi.trailertype",
+        "pk": 7,
+        "fields": {
+            "label": "48' Dry Van"
+        }
+    },
+    {
+        "model": "roadrunnerapi.trailertype",
+        "pk": 8,
+        "fields": {
+            "label": "Tanker"
+        }
+    }
+]

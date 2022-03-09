@@ -1,0 +1,23 @@
+[
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 1,
+        "fields": {
+            "label": "Non-Fiction"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 2,
+        "fields": {
+            "label": "Environmentalism"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 3,
+        "fields": {
+            "label": "Sports"
+        }
+    }
+]

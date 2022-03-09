@@ -1,0 +1,194 @@
+[
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 1,
+        "fields": {
+            "endorsement": null,
+            "label": "Furniture"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 2,
+        "fields": {
+            "endorsement": null,
+            "label": "Machinery"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 3,
+        "fields": {
+            "endorsement": null,
+            "label": "Live animals and fish"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 4,
+        "fields": {
+            "endorsement": null,
+            "label": "Meat and seafood"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 5,
+        "fields": {
+            "endorsement": null,
+            "label": "Milled grain products"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 6,
+        "fields": {
+            "endorsement": null,
+            "label": "Alcoholic beverages"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 7,
+        "fields": {
+            "endorsement": null,
+            "label": "Tobacco products"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 8,
+        "fields": {
+            "endorsement": null,
+            "label": " Building stone"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 9,
+        "fields": {
+            "endorsement": null,
+            "label": "Gravel and crushed stone"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 10,
+        "fields": {
+            "endorsement": 2,
+            "label": "Gasoline, kerosene, and ethanol"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 10,
+        "fields": {
+            "endorsement": 2,
+            "label": "Diesel and other fuel oils"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 11,
+        "fields": {
+            "endorsement": null,
+            "label": " Pharmaceutical products"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 12,
+        "fields": {
+            "endorsement": null,
+            "label": "Plastics and rubber"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 13,
+        "fields": {
+            "endorsement": null,
+            "label": "Wood products"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 14,
+        "fields": {
+            "endorsement": null,
+            "label": "Wood products"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 15,
+        "fields": {
+            "endorsement": null,
+            "label": "Textiles and leather"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 16,
+        "fields": {
+            "endorsement": null,
+            "label": "Electronics"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 17,
+        "fields": {
+            "endorsement": null,
+            "label": "Waste and scrap"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 18,
+        "fields": {
+            "endorsement": 3,
+            "label": "Explosives"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 19,
+        "fields": {
+            "endorsement": 3,
+            "label": "Poisons and etiologic materials"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 20,
+        "fields": {
+            "endorsement": 3,
+            "label": "Oxidizers"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 21,
+        "fields": {
+            "endorsement": 3,
+            "label": "Organic peroxides"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 22,
+        "fields": {
+            "endorsement": 3,
+            "label": "Radioactive material"
+        }
+    },
+    {
+        "model": "roadrunnerapi.freighttype",
+        "pk": 23,
+        "fields": {
+            "endorsement": 3,
+            "label": "Corrosives"
+        }
+    }
+]
