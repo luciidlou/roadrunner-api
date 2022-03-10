@@ -6,9 +6,13 @@
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "cSpell.words": [
+        "datetime",
+        "dropoff",
         "freighttype",
+        "loadfreighttype",
         "loadstatus",
         "roadrunnerapi",
-        "trailertype"
+        "trailertype",
+        "truckendorsement"
     ]
 }

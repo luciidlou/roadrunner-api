@@ -3,26 +3,47 @@
         "model": "roadrunnerapi.loadstatus",
         "pk": 1,
         "fields": {
-            "label": "Loading"
+            "label": "Routing to pickup"
         }
     },
     {
         "model": "roadrunnerapi.loadstatus",
         "pk": 2,
         "fields": {
-            "label": "On the road"
+            "label": "Waiting to load"
         }
     },
     {
         "model": "roadrunnerapi.loadstatus",
         "pk": 3,
         "fields": {
-            "label": "Unloading"
+            "label": "Loading"
         }
     },
     {
         "model": "roadrunnerapi.loadstatus",
         "pk": 4,
+        "fields": {
+            "label": "On the road"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 5,
+        "fields": {
+            "label": "Waiting to unload"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 6,
+        "fields": {
+            "label": "Unloading"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 7,
         "fields": {
             "label": "Delivered"
         }

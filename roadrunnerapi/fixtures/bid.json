@@ -1,0 +1,26 @@
+[
+    {
+        "model": "roadrunnerapi.bid",
+        "pk": 1,
+        "fields": {
+            "load": 3,
+            "truck": 2,
+            "dispatcher": 5,
+            "dollar_amount": 200.00,
+            "is_accepted": false,
+            "timestamp": "2022-03-10 12:00:39.830246"
+        }
+    },
+    {
+        "model": "roadrunnerapi.bid",
+        "pk": 2,
+        "fields": {
+            "load": 3,
+            "truck": 1,
+            "dispatcher": 5,
+            "dollar_amount": 150.00,
+            "is_accepted": true,
+            "timestamp": "2022-03-10 12:20:39.830246"
+        }
+    }
+]

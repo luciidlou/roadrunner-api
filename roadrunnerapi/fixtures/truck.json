@@ -1,0 +1,38 @@
+[
+    {
+        "model": "roadrunnerapi.truck",
+        "pk": 1,
+        "fields": {
+            "alias": "Cricket",
+            "trailer_type": 1,
+            "dispatcher": 6,
+            "current_city": "Philadelphia",
+            "current_state": "PA",
+            "is_assigned": true
+        }
+    },
+    {
+        "model": "roadrunnerapi.truck",
+        "pk": 2,
+        "fields": {
+            "alias": "Nightman",
+            "trailer_type": 2,
+            "dispatcher": 6,
+            "current_city": "Miami",
+            "current_state": "FL",
+            "is_assigned": false
+        }
+    },
+    {
+        "model": "roadrunnerapi.truck",
+        "pk": 3,
+        "fields": {
+            "alias": "Byron",
+            "trailer_type": 8,
+            "dispatcher": 6,
+            "current_city": "Denver",
+            "current_state": "CO",
+            "is_assigned": false
+        }
+    }
+]
