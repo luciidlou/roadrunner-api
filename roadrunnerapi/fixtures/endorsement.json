@@ -1,0 +1,26 @@
+[
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 1,
+        "fields": {
+            "letter": "T",
+            "label": "Double/Triples Endorsement"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 2,
+        "fields": {
+            "letter": "N",
+            "label": "Tank Vehicle Endorsement (Tanker)"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 3,
+        "fields": {
+            "letter": "H",
+            "label": "Hazardous Materials Endorsement (HAZMAT)"
+        }
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 1,
+        "fields": {
+            "label": "Loading"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 2,
+        "fields": {
+            "label": "On the road"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 3,
+        "fields": {
+            "label": "Unloading"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 4,
+        "fields": {
+            "label": "Delivered"
+        }
+    }
+]
