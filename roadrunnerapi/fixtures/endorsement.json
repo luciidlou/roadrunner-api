@@ -1,6 +1,6 @@
 [
     {
-        "model": "roadrunnerapi.loadstatus",
+        "model": "roadrunnerapi.endorsement",
         "pk": 1,
         "fields": {
             "letter": "T",
@@ -8,7 +8,7 @@
         }
     },
     {
-        "model": "roadrunnerapi.loadstatus",
+        "model": "roadrunnerapi.endorsement",
         "pk": 2,
         "fields": {
             "letter": "N",
@@ -16,7 +16,7 @@
         }
     },
     {
-        "model": "roadrunnerapi.loadstatus",
+        "model": "roadrunnerapi.endorsement",
         "pk": 3,
         "fields": {
             "letter": "H",

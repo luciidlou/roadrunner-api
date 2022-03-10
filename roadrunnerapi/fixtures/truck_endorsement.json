@@ -1,0 +1,26 @@
+[
+    {
+        "model": "roadrunnerapi.truckendorsement",
+        "pk": 1,
+        "fields": {
+            "truck": 1,
+            "endorsement": 1
+        }
+    },
+    {
+        "model": "roadrunnerapi.truckendorsement",
+        "pk": 2,
+        "fields": {
+            "truck": 3,
+            "endorsement": 2
+        }
+    },
+    {
+        "model": "roadrunnerapi.truckendorsement",
+        "pk": 3,
+        "fields": {
+            "truck": 3,
+            "endorsement": 3
+        }
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "model": "roadrunnerapi.loadfreighttype",
+        "pk": 1,
+        "fields": {
+            "load": 1,
+            "freight_type": 5
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadfreighttype",
+        "pk": 2,
+        "fields": {
+            "load": 1,
+            "freight_type": 6
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadfreighttype",
+        "pk": 3,
+        "fields": {
+            "load": 2,
+            "freight_type": 2
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadfreighttype",
+        "pk": 4,
+        "fields": {
+            "load": 2,
+            "freight_type": 9
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadfreighttype",
+        "pk": 5,
+        "fields": {
+            "load": 3,
+            "freight_type": 12
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadfreighttype",
+        "pk": 6,
+        "fields": {
+            "load": 3,
+            "freight_type": 15
+        }
+    }
+]

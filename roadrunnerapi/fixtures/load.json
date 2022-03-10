@@ -1,0 +1,62 @@
+[
+    {
+        "model": "roadrunnerapi.load",
+        "pk": 1,
+        "fields": {
+            "distributor": 5,
+            "created_on": "2022-03-09 14:00:39.830246",
+            "pickup_address": "629 Innovation Way",
+            "pickup_city": "Pittsburgh",
+            "pickup_state": "PA",
+            "pickup_datetime": "2022-03-18 14:00:39.830246",
+            "dropoff_address": "700 Thinkers Lane",
+            "dropoff_city": "Portland",
+            "dropoff_state": "OR",
+            "dropoff_datetime": "2022-03-24 16:00:39.830246",
+            "distance": 2565,
+            "is_hazardous": false,
+            "is_booked": false,
+            "load_status": null
+        }
+    },
+    {
+        "model": "roadrunnerapi.load",
+        "pk": 2,
+        "fields": {
+            "distributor": 5,
+            "created_on": "2022-03-09 14:00:39.830246",
+            "pickup_address": "1222 Ring Road",
+            "pickup_city": "Cincinnati",
+            "pickup_state": "Ohio",
+            "pickup_datetime": "2022-03-21 13:00:39.830246",
+            "dropoff_address": "444 Immersive Lane",
+            "dropoff_city": "Nashville",
+            "dropoff_state": "TN",
+            "dropoff_datetime": "2022-03-22 15:00:39.830246",
+            "distance": 274,
+            "is_hazardous": false,
+            "is_booked": false,
+            "load_status": null
+        }
+    },
+    {
+        "model": "roadrunnerapi.load",
+        "pk": 3,
+        "fields": {
+            "distributor": 5,
+            "created_on": "2022-03-09 14:00:39.830246",
+            "pickup_address": "457 Hunter Avenue",
+            "pickup_city": "Cincinnati",
+            "pickup_state": "Ohio",
+            "pickup_datetime": "2022-03-21 13:00:39.830246",
+            "dropoff_address": "277 Oxford Way",
+            "dropoff_city": "Nashville",
+            "dropoff_state": "TN",
+            "dropoff_datetime": "2022-03-22 15:00:39.830246",
+            "distance": 274,
+            "is_hazardous": false,
+            "is_booked": true,
+            "load_status": 1
+        }
+    }
+]
