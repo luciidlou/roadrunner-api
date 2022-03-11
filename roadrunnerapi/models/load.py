@@ -7,16 +7,8 @@ from rest_framework import serializers
 from roadrunnerapi.models.truck import Truck
 
 
-class TruckSerializerGet(serializers.ModelSerializer):
-
-    class Meta:
-        model = Truck
-        fields = ('id', 'alias', 'trailer_type', 'dispatcher',
-                  'current_city', 'current_state', 'is_assigned')
-        depth = 1
-
-
 class Load(models.Model):
+    """Model for a Load object"""
     distributor = models.ForeignKey("AppUser", on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     pickup_address = models.CharField(max_length=300)
@@ -45,3 +37,28 @@ class Load(models.Model):
             return serializer.data
         except Bid.DoesNotExist:
             return None
+
+
+# -------------------- SERIALIZERS --------------------
+
+
+class LoadSerializerGet(serializers.ModelSerializer):
+
+    class Meta:
+        model = Load
+        fields = ('id', 'distributor', 'created_on', 'pickup_address', 'pickup_city',
+                  'pickup_state', 'pickup_datetime', 'dropoff_address', 'dropoff_city',
+                  'dropoff_state', 'dropoff_datetime', 'distance', 'is_hazardous',
+                  'is_booked', 'load_status', 'assigned_truck')
+        depth = 2
+
+
+class TruckSerializerGet(serializers.ModelSerializer):
+
+    class Meta:
+        model = Truck
+        fields = ('id', 'alias', 'trailer_type', 'dispatcher',
+                  'current_city', 'current_state', 'is_assigned')
+        depth = 1
+
+# -----------------------------------------------------

@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from roadrunnerapi.models import AppUser, Load, Bid
 
+# -------------------- SERIALIZERS --------------------
 
 class LoadSerializerGet(serializers.ModelSerializer):
 
@@ -18,6 +19,7 @@ class LoadSerializerGet(serializers.ModelSerializer):
                   'is_booked', 'load_status', 'assigned_truck')
         depth = 2
 
+# -----------------------------------------------------
 
 class LoadView(ViewSet):
     def list(self, request):
