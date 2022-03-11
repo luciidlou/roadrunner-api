@@ -1,4 +1,19 @@
 from django.db import models
+from rest_framework.response import Response
+from rest_framework import status
+from roadrunnerapi.models.truck import Truck
+from roadrunnerapi.models.bid import Bid
+from rest_framework import serializers
+from roadrunnerapi.models.truck import Truck
+
+
+class TruckSerializerGet(serializers.ModelSerializer):
+
+    class Meta:
+        model = Truck
+        fields = ('id', 'alias', 'trailer_type', 'dispatcher',
+                  'current_city', 'current_state', 'is_assigned')
+        depth = 1
 
 
 class Load(models.Model):
@@ -15,6 +30,18 @@ class Load(models.Model):
     distance = models.PositiveIntegerField()
     is_hazardous = models.BooleanField(default=False)
     is_booked = models.BooleanField(default=False)
-    load_status = models.ForeignKey("LoadStatus", on_delete=models.CASCADE, null=True)
+    load_status = models.ForeignKey(
+        "LoadStatus", on_delete=models.CASCADE, null=True)
     freight_types = models.ManyToManyField(
         "FreightType", through="LoadFreightType", related_name="freight_types")
+
+    @property
+    def assigned_truck(self):
+        """Returns the assigned truck on booked loads"""
+        try:
+            bid = Bid.objects.get(is_accepted=True, load=self)
+            truck = Truck.objects.get(pk=bid.truck_id)
+            serializer = TruckSerializerGet(truck)
+            return serializer.data
+        except Bid.DoesNotExist:
+            return None

@@ -1,17 +1,28 @@
 from django.http import HttpResponseServerError
 from django.core.exceptions import ValidationError
+from rest_framework import serializers
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from roadrunnerapi.models import AppUser, Load, Bid
-from roadrunnerapi.serializers import LoadSerializerGet
+
+
+class LoadSerializerGet(serializers.ModelSerializer):
+
+    class Meta:
+        model = Load
+        fields = ('id', 'distributor', 'created_on', 'pickup_address', 'pickup_city',
+                  'pickup_state', 'pickup_datetime', 'dropoff_address', 'dropoff_city',
+                  'dropoff_state', 'dropoff_datetime', 'distance', 'is_hazardous',
+                  'is_booked', 'load_status', 'assigned_truck')
+        depth = 2
 
 
 class LoadView(ViewSet):
     def list(self, request):
         """Retrives all of the unbooked loads"""
-        loads = Load.objects.filter(is_booked=False)
+        loads = Load.objects.all()
         serializer = LoadSerializerGet(loads, many=True)
         return Response(serializer.data)
 
