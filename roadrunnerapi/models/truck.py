@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Truck(models.Model):
+    """Model for a Truck object"""
     alias = models.CharField(max_length=120)
     trailer_type = models.ForeignKey("TrailerType", on_delete=models.CASCADE)
     dispatcher = models.ForeignKey("AppUser", on_delete=models.CASCADE)
