@@ -7,7 +7,7 @@ from rest_framework.viewsets import ViewSet
 from roadrunnerapi.models import AppUser, Bid, Truck
 
 
-# -------------------- SERIALIZERS --------------------
+#! -------------------- SERIALIZERS --------------------
 
 class TruckSerializerGet(serializers.ModelSerializer):
 
@@ -17,7 +17,7 @@ class TruckSerializerGet(serializers.ModelSerializer):
                   'current_city', 'current_state', 'is_assigned')
         depth = 1
 
-# -----------------------------------------------------
+#! -----------------------------------------------------
 
 
 class TruckView(ViewSet):
