@@ -36,6 +36,15 @@ class Load(models.Model):
         except Bid.DoesNotExist:
             return None
 
+    @property
+    def is_owner(self):
+        """Checks to see if the load is owned by the current user. Returns boolean"""
+        return self.__is_owner
+
+    @is_owner.setter
+    def is_owner(self, value):
+        self.__is_owner = value
+
 
 # -------------------- SERIALIZERS --------------------
 
