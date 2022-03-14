@@ -1,13 +1,14 @@
-from django.http import HttpResponseServerError
 from django.core.exceptions import ValidationError
-from rest_framework import serializers
+from django.http import HttpResponseServerError
+from rest_framework import serializers, status
 from rest_framework.decorators import action
-from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
-from rest_framework import status
-from roadrunnerapi.models import AppUser, Load, Bid
+from rest_framework.viewsets import ViewSet
+from roadrunnerapi.models import AppUser, Bid, Load, LoadFreightType
+from roadrunnerapi.models.freight_type import FreightType
 
 # -------------------- SERIALIZERS --------------------
+
 
 class LoadSerializerGet(serializers.ModelSerializer):
 
@@ -16,10 +17,21 @@ class LoadSerializerGet(serializers.ModelSerializer):
         fields = ('id', 'distributor', 'created_on', 'pickup_address', 'pickup_city',
                   'pickup_state', 'pickup_datetime', 'dropoff_address', 'dropoff_city',
                   'dropoff_state', 'dropoff_datetime', 'distance', 'is_hazardous',
-                  'is_booked', 'load_status', 'assigned_truck')
+                  'is_booked', 'load_status', 'assigned_truck', 'freight_types')
+        depth = 2
+
+
+class LoadSerializerCreate(serializers.ModelSerializer):
+
+    class Meta:
+        model = Load
+        fields = ('pickup_address', 'pickup_city', 'pickup_state', 'pickup_datetime',
+                  'dropoff_address', 'dropoff_city', 'dropoff_state', 'dropoff_datetime',
+                  'distance', 'is_hazardous', 'freight_types')
         depth = 2
 
 # -----------------------------------------------------
+
 
 class LoadView(ViewSet):
     def list(self, request):
@@ -33,6 +45,23 @@ class LoadView(ViewSet):
         load = Load.objects.get(pk=pk)
         serializer = LoadSerializerGet(load)
         return Response(serializer.data)
+
+    def create(self, request):
+        """Creates a new Load object"""
+        distributor = AppUser.objects.get(user=request.auth.user)
+        freight_types_list = []
+
+        for freight_type_id in request.data['freight_types']:
+            freight_type = FreightType.objects.get(pk=freight_type_id)
+            freight_types_list.append(freight_type)
+
+        serializer = LoadSerializerCreate(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        new_load = serializer.save(distributor=distributor)
+
+        new_load.freight_types.set(freight_types_list)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     @action(methods=['get'], detail=False)
     def booked(self, request):

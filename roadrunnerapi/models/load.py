@@ -1,9 +1,7 @@
 from django.db import models
+from rest_framework import serializers, status
 from rest_framework.response import Response
-from rest_framework import status
-from roadrunnerapi.models.truck import Truck
 from roadrunnerapi.models.bid import Bid
-from rest_framework import serializers
 from roadrunnerapi.models.truck import Truck
 
 
@@ -40,18 +38,6 @@ class Load(models.Model):
 
 
 # -------------------- SERIALIZERS --------------------
-
-
-class LoadSerializerGet(serializers.ModelSerializer):
-
-    class Meta:
-        model = Load
-        fields = ('id', 'distributor', 'created_on', 'pickup_address', 'pickup_city',
-                  'pickup_state', 'pickup_datetime', 'dropoff_address', 'dropoff_city',
-                  'dropoff_state', 'dropoff_datetime', 'distance', 'is_hazardous',
-                  'is_booked', 'load_status', 'assigned_truck')
-        depth = 2
-
 
 class TruckSerializerGet(serializers.ModelSerializer):
 
