@@ -102,6 +102,12 @@ class LoadView(ViewSet):
         load.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
+    def destroy(self, request, pk):
+        """Deletes a single Load object"""
+        load = Load.objects.get(pk=pk)
+        load.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
     @action(methods=['get'], detail=False)
     def booked(self, request):
         """Retrieves all of the booked loads that the current user is responsible for"""
