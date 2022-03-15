@@ -60,3 +60,4 @@ class TruckView(ViewSet):
             return Response(
                 {'message': 'Distributors do not have access to the fleet manager'}
             )
+            

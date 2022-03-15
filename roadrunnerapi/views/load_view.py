@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from roadrunnerapi.models import AppUser, Bid, Load, LoadFreightType
 from roadrunnerapi.models.freight_type import FreightType
+from roadrunnerapi.models.truck import Truck
 
 # -------------------- SERIALIZERS --------------------
 
@@ -18,7 +19,8 @@ class LoadSerializerGet(serializers.ModelSerializer):
         fields = ('id', 'distributor', 'created_on', 'pickup_address', 'pickup_city',
                   'pickup_state', 'pickup_datetime', 'dropoff_address', 'dropoff_city',
                   'dropoff_state', 'dropoff_datetime', 'distance', 'is_hazardous',
-                  'is_booked', 'load_status', 'assigned_truck', 'freight_types', 'is_owner')
+                  'is_booked', 'load_status', 'assigned_truck', 'freight_types',
+                  'is_owner', 'bid_macros')
         depth = 2
 
 
@@ -30,6 +32,14 @@ class LoadSerializerCreate(serializers.ModelSerializer):
                   'dropoff_address', 'dropoff_city', 'dropoff_state', 'dropoff_datetime',
                   'distance', 'is_hazardous', 'freight_types')
         depth = 2
+
+
+class BidSerializerCreate(serializers.ModelSerializer):
+
+    class Meta:
+        model = Bid
+        fields = ('truck', 'dollar_amount')
+        depth = 1
 
 # -----------------------------------------------------
 
@@ -120,10 +130,21 @@ class LoadView(ViewSet):
             return Response(serializer.data)
         else:
             loads = Load.objects.all()
-            bids = Bid.objects.filter(is_accepted=True, dispatcher=app_user)
+            bids = Bid.objects.filter(is_accepted=True, dispatcher_id=app_user.id)
             for load in loads:
                 for bid in bids:
                     if load == bid.load:
                         dispatcher_loads.append(load)
             serializer = LoadSerializerGet(dispatcher_loads, many=True)
             return Response(serializer.data)
+
+    @action(methods=['post'], detail=True)
+    def placebid(self, request, pk):
+        """Executes a POST request to create a Bid object for a particular Load"""
+        dispatcher = AppUser.objects.get(user=request.auth.user)
+        load = Load.objects.get(pk=pk)
+        truck = Truck.objects.get(pk=request.data['truck'])
+        serializer = BidSerializerCreate(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(dispatcher=dispatcher, load=load, truck=truck)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -17,12 +17,13 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
-from roadrunnerapi.views import TruckView, LoadView, FreightTypeView, login_user, register_user
+from roadrunnerapi.views import TruckView, LoadView, FreightTypeView, BidView, login_user, register_user
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'loads', LoadView, 'load')
 router.register(r'trucks', TruckView, 'truck')
 router.register(r'freighttypes', FreightTypeView, 'freighttype')
+router.register(r'bids', BidView, 'bid')
 
 urlpatterns = [
     path('register', register_user),

@@ -10,3 +10,5 @@ roadrunnerapi_truck as t
 ON l.id = b.load_id
 AND b.truck_id = t.id
 WHERE b.is_accepted = true
+
+

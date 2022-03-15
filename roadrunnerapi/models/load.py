@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Max, Min, Avg, Count
 from rest_framework import serializers, status
 from rest_framework.response import Response
 from roadrunnerapi.models.bid import Bid
@@ -45,8 +46,21 @@ class Load(models.Model):
     def is_owner(self, value):
         self.__is_owner = value
 
+    @property
+    def bid_macros(self):
+        "Returns the highest on a load"
+        bids = Bid.objects.filter(load=self)
+        macros = Bid.objects.filter(load=self).aggregate(
+            Max('dollar_amount'), Min('dollar_amount'), Avg('dollar_amount'))
+        return {
+            'count': len(bids),
+            'avg': macros['dollar_amount__avg'],
+            'max': macros['dollar_amount__max'],
+            'min': macros['dollar_amount__min']
+        }
 
 # -------------------- SERIALIZERS --------------------
+
 
 class TruckSerializerGet(serializers.ModelSerializer):
 
