@@ -1,11 +1,14 @@
+from datetime import datetime
+
 from rest_framework import serializers, status
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
-from roadrunnerapi.models import AppUser, Bid, Truck, Load
-from roadrunnerapi.models.endorsement import Endorsement
-
+from roadrunnerapi.models import (AppUser, Bid, Endorsement, Load, TrailerType,
+                                  Truck)
 
 # -------------------- SERIALIZERS --------------------
+
 
 class TruckSerializerGet(serializers.ModelSerializer):
 
@@ -13,7 +16,8 @@ class TruckSerializerGet(serializers.ModelSerializer):
         model = Truck
         fields = ('id', 'alias', 'trailer_type', 'dispatcher',
                   'current_city', 'current_state', 'is_assigned',
-                  'current_load')
+                  'endorsements', 'current_load', 'is_active',
+                  'created_on', 'retired_on')
         depth = 1
 
 
@@ -68,9 +72,38 @@ class TruckView(ViewSet):
                 {'message': 'Distributors do not have access to the fleet manager'}
             )
 
+    def retrieve(self, request, pk):
+        """Retrives all of the trucks that belong to the current user (current user must be a dispatcher)"""
+        app_user = AppUser.objects.get(user=request.auth.user)
+
+        if app_user.user_type == 'dispatcher':
+            truck = Truck.objects.get(pk=pk)
+
+            if truck.is_assigned:
+                bids = Bid.objects.filter(truck=truck, is_accepted=True)
+                loads = Load.objects.all()
+                for bid in bids:
+                    for load in loads:
+                        if bid.load_id == load.id:
+                            found_load = Load.objects.get(pk=load.id)
+                            serializer = LoadSerializerGet(found_load)
+                            truck.current_load = serializer.data
+                            break
+            else:
+                truck.current_load = None
+
+            serializer = TruckSerializerGet(truck)
+
+            return Response(serializer.data)
+        else:
+            return Response(
+                {'message': 'Distributors do not have access to the fleet manager'}
+            )
+
     def create(self, request):
         """Creates a new Truck object (POST method)"""
         dispatcher = AppUser.objects.get(user=request.auth.user)
+        trailer_type = TrailerType.objects.get(pk=request.data['trailer_type'])
         endorsements_list = []
 
         for endorsement_id in request.data['endorsements']:
@@ -79,8 +112,43 @@ class TruckView(ViewSet):
 
         serializer = TruckSerializerCreate(data=request.data)
         serializer.is_valid(raise_exception=True)
-        new_truck = serializer.save(dispatcher=dispatcher)
+        new_truck = serializer.save(
+            dispatcher=dispatcher, trailer_type=trailer_type)
 
         new_truck.endorsements.set(endorsements_list)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, pk):
+        """Updates an existing truck object (PUT request)"""
+        truck = Truck.objects.get(pk=pk)
+        trailer_type = TrailerType.objects.get(pk=request.data['trailer_type'])
+        endorsements_list = []
+
+        for endorsement_id in request.data['endorsements']:
+            endorsement = Endorsement.objects.get(pk=endorsement_id)
+            endorsements_list.append(endorsement)
+
+        truck.alias = request.data['alias']
+        truck.trailer_type = trailer_type
+        truck.current_city = request.data['current_city']
+        truck.current_state = request.data['current_state']
+        truck.endorsements.set(endorsements_list)
+
+        truck.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+    @action(methods=['put'], detail=True)
+    def retire(self, request, pk):
+        """Flips the value of a trucks is_active property (BOOLEAN)"""
+        truck = Truck.objects.get(pk=pk)
+
+        if truck.is_active is True:
+            truck.is_active = False
+            truck.retired_on = datetime.now()
+        else:
+            truck.is_active = True
+            truck.retired_on = None
+
+        truck.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)

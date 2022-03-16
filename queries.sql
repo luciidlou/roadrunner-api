@@ -12,3 +12,8 @@ AND b.truck_id = t.id
 WHERE b.is_accepted = true
 
 
+DELETE FROM roadrunnerapi_bid;
+DELETE FROM roadrunnerapi_loadfreighttype;
+DELETE FROM roadrunnerapi_load;
+DELETE FROM roadrunnerapi_truck WHERE id = 6;
+DELETE FROM roadrunnerapi_truckendorsement;
