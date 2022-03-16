@@ -43,7 +43,7 @@ class BidView(ViewSet):
     def loadbids(self, request, pk):
         """Retrives all of the Bid objects that belong to a particular load"""
         app_user = AppUser.objects.get(user=request.auth.user)
-        bids = Bid.objects.filter(load_id=pk)
+        bids = Bid.objects.filter(load_id=pk).order_by('-timestamp__minute')
 
         for bid in bids:
             if bid.dispatcher == app_user:
