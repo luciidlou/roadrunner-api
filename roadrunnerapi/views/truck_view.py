@@ -1,10 +1,8 @@
-from django.core.exceptions import ValidationError
-from django.http import HttpResponseServerError
 from rest_framework import serializers, status
-from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from roadrunnerapi.models import AppUser, Bid, Truck, Load
+from roadrunnerapi.models.endorsement import Endorsement
 
 
 # -------------------- SERIALIZERS --------------------
@@ -17,7 +15,16 @@ class TruckSerializerGet(serializers.ModelSerializer):
                   'current_city', 'current_state', 'is_assigned',
                   'current_load')
         depth = 1
-        
+
+
+class TruckSerializerCreate(serializers.ModelSerializer):
+
+    class Meta:
+        model = Truck
+        fields = ('alias', 'trailer_type', 'current_city',
+                  'current_state', 'endorsements')
+
+
 class LoadSerializerGet(serializers.ModelSerializer):
 
     class Meta:
@@ -60,4 +67,20 @@ class TruckView(ViewSet):
             return Response(
                 {'message': 'Distributors do not have access to the fleet manager'}
             )
-            
+
+    def create(self, request):
+        """Creates a new Truck object (POST method)"""
+        dispatcher = AppUser.objects.get(user=request.auth.user)
+        endorsements_list = []
+
+        for endorsement_id in request.data['endorsements']:
+            endorsement = Endorsement.objects.get(pk=endorsement_id)
+            endorsements_list.append(endorsement)
+
+        serializer = TruckSerializerCreate(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        new_truck = serializer.save(dispatcher=dispatcher)
+
+        new_truck.endorsements.set(endorsements_list)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
