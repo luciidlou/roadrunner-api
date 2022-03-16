@@ -3,3 +3,5 @@ from .load_view import LoadView
 from .truck_view import TruckView
 from .freight_type_view import FreightTypeView
 from .bid_view import BidView
+from .trailer_type_view import TrailerTypeView
+from .endorsements_view import EndorsementView

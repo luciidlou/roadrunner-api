@@ -1,11 +1,8 @@
-from django.apps import AppConfig
-from django.core.exceptions import ValidationError
-from django.http import HttpResponseServerError
 from rest_framework import serializers, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
-from roadrunnerapi.models import Bid, Load
+from roadrunnerapi.models import Bid
 from roadrunnerapi.models.app_user import AppUser
 
 # -------------------- SERIALIZERS --------------------
@@ -16,7 +13,8 @@ class BidSerializerGet(serializers.ModelSerializer):
     class Meta:
         model = Bid
         fields = ('id', 'load', 'truck', 'dispatcher',
-                  'dollar_amount', 'is_accepted', 'is_owner')
+                  'dollar_amount', 'is_accepted', 'is_owner',
+                  'timestamp')
         depth = 2
 
 # -----------------------------------------------------

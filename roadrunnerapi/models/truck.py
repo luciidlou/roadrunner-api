@@ -11,6 +11,9 @@ class Truck(models.Model):
     is_assigned = models.BooleanField(default=False)
     endorsements = models.ManyToManyField(
         "Endorsement", through="TruckEndorsement", related_name="endorsements")
+    is_active = models.BooleanField(default=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    retired_on = models.DateTimeField(null=True)
 
     @property
     def current_load(self):

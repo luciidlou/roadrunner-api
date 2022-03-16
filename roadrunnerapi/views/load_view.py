@@ -1,11 +1,8 @@
-from django.core.exceptions import ValidationError
-from django.http import HttpResponseServerError
-from django.utils.timezone import make_naive
 from rest_framework import serializers, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
-from roadrunnerapi.models import AppUser, Bid, Load, LoadFreightType
+from roadrunnerapi.models import AppUser, Bid, Load
 from roadrunnerapi.models.freight_type import FreightType
 from roadrunnerapi.models.truck import Truck
 
