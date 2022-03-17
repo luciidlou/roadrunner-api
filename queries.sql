@@ -17,3 +17,9 @@ DELETE FROM roadrunnerapi_loadfreighttype;
 DELETE FROM roadrunnerapi_load;
 DELETE FROM roadrunnerapi_truck WHERE id = 6;
 DELETE FROM roadrunnerapi_truckendorsement;
+
+UPDATE roadrunnerapi_load
+SET load_status_id = 1
+WHERE id = 19;
+
+

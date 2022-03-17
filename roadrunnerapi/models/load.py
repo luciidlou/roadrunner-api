@@ -52,12 +52,20 @@ class Load(models.Model):
         bids = Bid.objects.filter(load=self)
         macros = Bid.objects.filter(load=self).aggregate(
             Max('dollar_amount'), Min('dollar_amount'), Avg('dollar_amount'))
-        return {
-            'count': len(bids),
-            'avg': macros['dollar_amount__avg'],
-            'max': macros['dollar_amount__max'],
-            'min': macros['dollar_amount__min']
-        }
+        if len(bids) > 0:
+            return {
+                'count': len(bids),
+                'avg': round(macros['dollar_amount__avg'], 2),
+                'max': round(macros['dollar_amount__max'], 2),
+                'min': round(macros['dollar_amount__min'], 2)
+            }
+        else:
+            return {
+                'count': 0,
+                'avg': 0,
+                'max': 0,
+                'min': 0
+            }
 
 # -------------------- SERIALIZERS --------------------
 
