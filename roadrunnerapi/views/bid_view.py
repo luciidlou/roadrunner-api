@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from roadrunnerapi.models import AppUser, Bid, Load
 from roadrunnerapi.models.load_status import LoadStatus
+from roadrunnerapi.models.truck import Truck
 
 # -------------------- SERIALIZERS --------------------
 
@@ -72,6 +73,7 @@ class BidView(ViewSet):
         """Retrives all of the Bid objects that belong to a particular load"""
         bid = Bid.objects.get(pk=pk)
         load = Load.objects.get(pk=request.data['load']['id'])
+        truck = Truck.objects.get(pk=request.data['truck']['id'])
         initial_status = LoadStatus.objects.get(pk=1)
 
         if load.is_booked is False:
@@ -81,6 +83,9 @@ class BidView(ViewSet):
             load.is_booked = True
             load.load_status = initial_status
             load.save()
+
+            truck.is_assigned = True
+            truck.save()
         else:
             bid.is_accepted = False
             bid.save()
@@ -88,5 +93,8 @@ class BidView(ViewSet):
             load.is_booked = False
             load.load_status = None
             load.save()
+
+            truck.is_assigned = False
+            truck.save()
 
         return Response(None, status=status.HTTP_204_NO_CONTENT)
