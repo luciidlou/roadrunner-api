@@ -1,7 +1,6 @@
 from django.db import models
-from django.db.models import Max, Min, Avg, Count
-from rest_framework import serializers, status
-from rest_framework.response import Response
+from django.db.models import Max, Min, Avg
+from rest_framework import serializers
 from roadrunnerapi.models.bid import Bid
 from roadrunnerapi.models.truck import Truck
 

@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from roadrunnerapi.models import AppUser, Bid, Load
 from roadrunnerapi.models.freight_type import FreightType
+from roadrunnerapi.models.load_status import LoadStatus
 from roadrunnerapi.models.truck import Truck
 
 # -------------------- SERIALIZERS --------------------
@@ -127,7 +128,8 @@ class LoadView(ViewSet):
             return Response(serializer.data)
         else:
             loads = Load.objects.all()
-            bids = Bid.objects.filter(is_accepted=True, dispatcher_id=app_user.id)
+            bids = Bid.objects.filter(
+                is_accepted=True, dispatcher_id=app_user.id)
             for load in loads:
                 for bid in bids:
                     if load == bid.load:
@@ -145,3 +147,30 @@ class LoadView(ViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save(dispatcher=dispatcher, load=load, truck=truck)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @action(methods=['put'], detail=True)
+    def changestatus(self, request, pk):
+        """Executes a PUT request to change the status of a Load and location of assigned truck"""
+        load = Load.objects.get(pk=pk)
+        truck = Truck.objects.get(pk=request.data['truck'])
+
+        if request.data['load_status'] != 0:
+            load_status = LoadStatus.objects.get(
+                pk=request.data['load_status'])
+            if load_status.label == "Delivered":
+                load.load_status = load_status
+                truck.is_assigned = False
+            else:
+                load_status = LoadStatus.objects.get(
+                    pk=request.data['load_status'])
+                load.load_status = load_status
+
+        if request.data['current_city'] is not None and request.data['current_state'] is not None:
+            truck = Truck.objects.get(pk=request.data['truck'])
+            truck.current_city = request.data['current_city']
+            truck.current_state = request.data['current_state']
+
+        load.save()
+        truck.save()
+
+        return Response(None, status=status.HTTP_201_CREATED)
