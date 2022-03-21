@@ -1,5 +1,7 @@
 from django.db import models
 
+# from roadrunnerapi.models import Load, Bid
+
 
 class Truck(models.Model):
     """Model for a Truck object"""
@@ -23,3 +25,28 @@ class Truck(models.Model):
     @current_load.setter
     def current_load(self, value):
         self.__current_load = value
+
+
+    @property
+    def load_count(self):
+        """Returns the number of loads a truck has completed"""
+        return self.__load_count
+
+    @load_count.setter
+    def load_count(self, value):
+        self.__load_count = value
+
+
+# ? WHY CAN'T I DO THIS. WTF IS A CIRCULAR IMPORT??? (SEE IMPORTS ON LINE 3)
+
+    # @property
+    # def load_count(self):
+    #     loads_list = []
+    #     bids = Bid.objects.filter(is_accepted=True, truck=self)
+    #     loads = Load.objects.filter(is_booked=True)
+    #     for bid in bids:
+    #         for load in loads:
+    #             if bid.load == load:
+    #                 loads_list.append(load)
+
+    #     return len(loads_list)
