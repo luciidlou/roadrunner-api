@@ -27,6 +27,16 @@ class Truck(models.Model):
         self.__current_load = value
 
 
+    @property
+    def load_count(self):
+        """Returns the number of loads a truck has completed"""
+        return self.__load_count
+
+    @load_count.setter
+    def load_count(self, value):
+        self.__load_count = value
+
+
 # ? WHY CAN'T I DO THIS. WTF IS A CIRCULAR IMPORT??? (SEE IMPORTS ON LINE 3)
 
     # @property

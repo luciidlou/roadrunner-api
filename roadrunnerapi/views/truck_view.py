@@ -74,31 +74,24 @@ class TruckView(ViewSet):
 
     def retrieve(self, request, pk):
         """Retrives all of the trucks that belong to the current user (current user must be a dispatcher)"""
-        app_user = AppUser.objects.get(user=request.auth.user)
+        truck = Truck.objects.get(pk=pk)
 
-        if app_user.user_type == 'dispatcher':
-            truck = Truck.objects.get(pk=pk)
-
-            if truck.is_assigned:
-                bids = Bid.objects.filter(truck=truck, is_accepted=True)
-                loads = Load.objects.all()
-                for bid in bids:
-                    for load in loads:
-                        if bid.load_id == load.id:
-                            found_load = Load.objects.get(pk=load.id)
-                            serializer = LoadSerializerGet(found_load)
-                            truck.current_load = serializer.data
-                            break
-            else:
-                truck.current_load = None
-
-            serializer = TruckSerializerGet(truck)
-
-            return Response(serializer.data)
+        if truck.is_assigned:
+            bids = Bid.objects.filter(truck=truck, is_accepted=True)
+            loads = Load.objects.all()
+            for bid in bids:
+                for load in loads:
+                    if bid.load_id == load.id:
+                        found_load = Load.objects.get(pk=load.id)
+                        serializer = LoadSerializerGet(found_load)
+                        truck.current_load = serializer.data
+                        break
         else:
-            return Response(
-                {'message': 'Distributors do not have access to the fleet manager'}
-            )
+            truck.current_load = None
+
+        serializer = TruckSerializerGet(truck)
+
+        return Response(serializer.data)
 
     def create(self, request):
         """Creates a new Truck object (POST method)"""
