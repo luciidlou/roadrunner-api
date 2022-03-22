@@ -46,7 +46,7 @@ class LoadView(ViewSet):
     def list(self, request):
         """Retrives all of the unbooked loads"""
         app_user = AppUser.objects.get(user=request.auth.user)
-        loads = Load.objects.all()
+        loads = Load.objects.all().order_by('pickup_datetime')
 
         for load in loads:
             if load.distributor == app_user:
