@@ -73,7 +73,7 @@ class TruckView(ViewSet):
             )
 
     def retrieve(self, request, pk):
-        """Retrives all of the trucks that belong to the current user (current user must be a dispatcher)"""
+        """Retrives a single Truck object"""
         truck = Truck.objects.get(pk=pk)
 
         if truck.is_assigned:
