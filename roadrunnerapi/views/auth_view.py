@@ -61,6 +61,8 @@ def register_user(request):
     app_user = AppUser.objects.create(
         user=new_user,
         company=request.data['company'],
+        about=request.data['about'],
+        established=request.data['established'],
         user_type=request.data['user_type']
     )
 

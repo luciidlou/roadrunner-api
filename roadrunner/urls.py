@@ -19,7 +19,7 @@ from django.urls import path
 from rest_framework import routers
 from roadrunnerapi.views import (BidView, EndorsementView, FreightTypeView,
                                  LoadStatusView, LoadView, TrailerTypeView,
-                                 TruckView, login_user, register_user)
+                                 TruckView, AppUserView, login_user, register_user)
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'loads', LoadView, 'load')
@@ -29,6 +29,7 @@ router.register(r'trailertypes', TrailerTypeView, 'trailertype')
 router.register(r'freighttypes', FreightTypeView, 'freighttype')
 router.register(r'loadstatuses', LoadStatusView, 'loadstatus')
 router.register(r'bids', BidView, 'bid')
+router.register(r'users', AppUserView, 'user')
 
 urlpatterns = [
     path('register', register_user),
