@@ -5,7 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from roadrunnerapi.models import (AppUser, Bid, Endorsement, Load, TrailerType,
-                                  Truck)
+                                  Truck, LoadStatus)
 
 # -------------------- SERIALIZERS --------------------
 
@@ -17,7 +17,7 @@ class TruckSerializerGet(serializers.ModelSerializer):
         fields = ('id', 'alias', 'trailer_type', 'dispatcher',
                   'current_city', 'current_state', 'is_assigned',
                   'endorsements', 'current_load', 'is_active',
-                  'created_on', 'retired_on')
+                  'created_on', 'retired_on', 'load_count')
         depth = 1
 
 
@@ -75,9 +75,9 @@ class TruckView(ViewSet):
     def retrieve(self, request, pk):
         """Retrives a single Truck object"""
         truck = Truck.objects.get(pk=pk)
+        bids = Bid.objects.filter(truck=truck, is_accepted=True)
 
         if truck.is_assigned:
-            bids = Bid.objects.filter(truck=truck, is_accepted=True)
             loads = Load.objects.all()
             for bid in bids:
                 for load in loads:
@@ -88,6 +88,17 @@ class TruckView(ViewSet):
                         break
         else:
             truck.current_load = None
+
+        load_count_list = []
+        delivered = LoadStatus.objects.get(pk=7)
+        booked_loads = Load.objects.filter(is_booked=True, load_status=delivered)
+
+        for bid in bids:
+            for load in booked_loads:
+                if bid.load == load:
+                    load_count_list.append(load)
+
+        truck.load_count = len(load_count_list)
 
         serializer = TruckSerializerGet(truck)
 
