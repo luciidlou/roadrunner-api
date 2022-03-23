@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.db import models
 from django.db.models import Max, Min, Avg
 from rest_framework import serializers

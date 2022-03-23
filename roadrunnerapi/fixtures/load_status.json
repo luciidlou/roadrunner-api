@@ -47,5 +47,26 @@
         "fields": {
             "label": "Delivered"
         }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 8,
+        "fields": {
+            "label": "Load Edited"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 9,
+        "fields": {
+            "label": "Bid accepted"
+        }
+    },
+    {
+        "model": "roadrunnerapi.loadstatus",
+        "pk": 10,
+        "fields": {
+            "label": "Cancelled booking"
+        }
     }
 ]

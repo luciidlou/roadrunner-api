@@ -9,3 +9,4 @@ from .load_status import LoadStatus
 from .trailer_type import TrailerType
 from .truck import Truck
 from .truck_endorsement import TruckEndorsement
+from .load_history import LoadHistory
