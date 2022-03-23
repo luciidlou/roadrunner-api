@@ -8,4 +8,4 @@ from .endorsements_view import EndorsementView
 from .load_status_view import LoadStatusView
 from .app_user_view import AppUserView
 from .dispatcher_rating_view import DispatcherRatingView
-
+from .load_history_view import LoadHistoryView

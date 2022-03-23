@@ -27,7 +27,7 @@ class LoadSerializerCreate(serializers.ModelSerializer):
 
     class Meta:
         model = Load
-        fields = ('pickup_address', 'pickup_city', 'pickup_state', 'pickup_datetime',
+        fields = ('id', 'pickup_address', 'pickup_city', 'pickup_state', 'pickup_datetime',
                   'dropoff_address', 'dropoff_city', 'dropoff_state', 'dropoff_datetime',
                   'distance', 'is_hazardous', 'freight_types')
         depth = 2
@@ -179,5 +179,5 @@ class LoadView(ViewSet):
 
         load.save()
         truck.save()
-
-        return Response(None, status=status.HTTP_201_CREATED)
+        
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
