@@ -6,3 +6,6 @@ from .bid_view import BidView
 from .trailer_type_view import TrailerTypeView
 from .endorsements_view import EndorsementView
 from .load_status_view import LoadStatusView
+from .app_user_view import AppUserView
+from .dispatcher_rating_view import DispatcherRatingView
+

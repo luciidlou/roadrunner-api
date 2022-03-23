@@ -17,7 +17,7 @@ class TruckSerializerGet(serializers.ModelSerializer):
         fields = ('id', 'alias', 'trailer_type', 'dispatcher',
                   'current_city', 'current_state', 'is_assigned',
                   'endorsements', 'current_load', 'is_active',
-                  'created_on', 'retired_on', 'load_count')
+                  'created_on', 'retired_on', 'load_count', 'is_owned')
         depth = 1
 
 
@@ -74,6 +74,7 @@ class TruckView(ViewSet):
 
     def retrieve(self, request, pk):
         """Retrives a single Truck object"""
+        app_user = AppUser.objects.get(user=request.auth.user)
         truck = Truck.objects.get(pk=pk)
         bids = Bid.objects.filter(truck=truck, is_accepted=True)
 
@@ -91,7 +92,8 @@ class TruckView(ViewSet):
 
         load_count_list = []
         delivered = LoadStatus.objects.get(pk=7)
-        booked_loads = Load.objects.filter(is_booked=True, load_status=delivered)
+        booked_loads = Load.objects.filter(
+            is_booked=True, load_status=delivered)
 
         for bid in bids:
             for load in booked_loads:
@@ -99,6 +101,11 @@ class TruckView(ViewSet):
                     load_count_list.append(load)
 
         truck.load_count = len(load_count_list)
+
+        if truck.dispatcher == app_user:
+            truck.is_owned = True
+        else:
+            truck.is_owned = False
 
         serializer = TruckSerializerGet(truck)
 

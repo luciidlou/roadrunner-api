@@ -36,6 +36,15 @@ class Truck(models.Model):
     def load_count(self, value):
         self.__load_count = value
 
+    @property
+    def is_owned(self):
+        """Returns a boolean to see if the current user owns this truck"""
+        return self.__is_owned
+
+    @is_owned.setter
+    def is_owned(self, value):
+        self.__is_owned = value
+
 
 # ? WHY CAN'T I DO THIS. WTF IS A CIRCULAR IMPORT??? (SEE IMPORTS ON LINE 3)
 

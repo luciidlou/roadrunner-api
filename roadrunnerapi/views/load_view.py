@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import serializers, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -46,7 +47,13 @@ class LoadView(ViewSet):
     def list(self, request):
         """Retrives all of the unbooked loads"""
         app_user = AppUser.objects.get(user=request.auth.user)
-        loads = Load.objects.all()
+        loads = Load.objects.all().order_by('pickup_datetime')
+
+        search_text = self.request.query_params.get('q', None)
+        if search_text:
+            loads = Load.objects.order_by('pickup_datetime').filter(
+                Q(pickup_city__contains=search_text)
+            )
 
         for load in loads:
             if load.distributor == app_user:
