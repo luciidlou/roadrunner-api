@@ -19,7 +19,7 @@ class LoadSerializerGet(serializers.ModelSerializer):
                   'pickup_state', 'pickup_datetime', 'dropoff_address', 'dropoff_city',
                   'dropoff_state', 'dropoff_datetime', 'distance', 'is_hazardous',
                   'is_booked', 'load_status', 'assigned_truck', 'freight_types',
-                  'is_owner', 'bid_macros')
+                  'is_owner', 'bid_macros', 'bid_ending')
         depth = 2
 
 
