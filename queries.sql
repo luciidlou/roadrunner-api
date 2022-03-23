@@ -21,6 +21,8 @@ DELETE FROM roadrunnerapi_load;
 DELETE FROM roadrunnerapi_truck;
 DELETE FROM roadrunnerapi_truckendorsement;
 
+DELETE FROM roadrunnerapi_dispatcherrating;
+
 UPDATE roadrunnerapi_load
 SET load_status_id = 1
 WHERE id = 19;
