@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from django.db import models
 from django.db.models import Max, Min, Avg
 from rest_framework import serializers
@@ -65,6 +66,12 @@ class Load(models.Model):
                 'max': 0,
                 'min': 0
             }
+
+    @property
+    def bid_ending(self):
+        """Returns a datetime value that is exactly 24hours before pickup_datetime property"""
+        time_delta = timedelta(hours=19)
+        return self.pickup_datetime - time_delta
 
 # -------------------- SERIALIZERS --------------------
 
