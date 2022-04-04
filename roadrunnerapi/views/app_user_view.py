@@ -28,7 +28,7 @@ class AppUserView(ViewSet):
                 total_rating = 0
                 for rating in ratings:
                     total_rating += rating.rating
-                app_user.avg_rating = total_rating / len(ratings)
+                app_user.avg_rating = round((total_rating / len(ratings)), 2)
             else:
                 app_user.avg_rating = 0
 
